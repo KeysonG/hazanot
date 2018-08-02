@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Hazanot</title>
+  <style>
+
+  </style>
+</head>
+<body>
+  <h1>הזנות ל842</h1>
+  <h2>כמה אנשים מזינים</h2>
+  <input id='people', type="number">
+  <h3>מאיזו שעה</h3>
+  <input id='start' type="time">
+  <h3>עד איזה שעה</h3>
+  <input id='end' type="time">
+  <button id='button'>GO</button>
+
+  <div id="result"></div>
+
+<script>
+        const result = document.getElementById("result")
+
+    document.getElementById('button').addEventListener('click', function(){
+      result.innerHTML = ''
+      const people = parseInt(document.getElementById("people").value);
+      const start = document.getElementById("start").value;
+
+      const end = document.getElementById("end").value;
+
+      var timeStart = new Date("01/01/2007 " + start)
+      var timeEnd = new Date("01/01/2007 " + end);
+      if(timeEnd<timeStart){
+        timeEnd = new Date("01/02/2007 " + end);
+        console.log(timeEnd);
+      }
+      var hourDiff = timeEnd - timeStart;
+
+       var diff =(timeEnd.getTime() - timeStart.getTime()) / 1000;
+  diff /= 60;
+  const totalTime = Math.abs(Math.round(diff));
+  const timePP = totalTime/people
+  const times = []
+  times[0] = timeStart
+  for (var i = 1; i < people +1 ; i++) {
+    times[i] = new Date(times[i-1].getTime() + timePP*60000);
+  }
+  var niceTimes = []
+times.forEach(function(item, index){
+ niceTimes[index] = item.toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})
+})
+niceTimes.forEach(function(item, index, arr){
+   if (Object.is(arr.length - 1, index)) {return}
+  result.innerHTML = result.innerHTML + `<div>${item} - ${niceTimes[index+1]}  </div>`
+})
+
+
+
+
+    })
+  </script>
+</body>
+</html>
