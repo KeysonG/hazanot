@@ -13,6 +13,12 @@
     height: 40px;
     cursor: pointer;
   }
+  select {
+    display: inline-block;
+  }
+/*  .time {
+    display: inline-block;
+  }*/
   </style>
 </head>
 <body>
@@ -29,8 +35,11 @@
   <div id="result"></div>
 
 <script>
+  const soldiers = ['zwil','debi', 'shuki', 'ismael', 'bardugo', 'goldi', 'vaanununu', 'karni', 'gidon', 'other']
         const result = document.getElementById("result")
-
+  let dropdownHTML=''
+  soldiers.forEach(function(item, index){  dropdownHTML +=(`<option>${item}</option>`)});
+  console.log(dropdownHTML)
     document.getElementById('form').addEventListener('submit', function(e){
           e.preventDefault();
       result.innerHTML = ''
@@ -53,17 +62,24 @@
   const totalTime = Math.abs(Math.round(diff));
   const timePP = totalTime/people
   const times = []
+
+  var coeff = 1000 * 60 * 5;
+
+
+
   times[0] = timeStart
   for (var i = 1; i < people +1 ; i++) {
-    times[i] = new Date(times[i-1].getTime() + timePP*60000);
+    times[i]=  new Date(times[i-1].getTime() + timePP*60000);
   }
   var niceTimes = []
 times.forEach(function(item, index){
+  item = new Date(Math.round(item / coeff) * coeff)
  niceTimes[index] = item.toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})
 })
 niceTimes.forEach(function(item, index, arr){
+  // item = Math.Round(item)
    if (Object.is(arr.length - 1, index)) {return}
-  result.innerHTML = result.innerHTML + `<div>${item} - ${niceTimes[index+1]}  </div>`
+  result.innerHTML = result.innerHTML + `<div class='time'> <span>${item} - ${niceTimes[index+1]}</span  </div> <select>${dropdownHTML}</select>`
 })
 
 
