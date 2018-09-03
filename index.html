@@ -35,7 +35,7 @@
   <div id="result"></div>
 
 <script>
-  const soldiers = ['zwil','debi', 'shuki', 'ismael', 'bardugo', 'goldi', 'vaanununu', 'karni', 'gidon', 'other']
+  const soldiers = ['zwil','debi', 'shuki','zwi','ismael', 'bardugo', 'goldi', 'vaanununu', 'karni', 'gidon', 'other']
         const result = document.getElementById("result")
   let dropdownHTML=''
   soldiers.forEach(function(item, index){  dropdownHTML +=(`<option>${item}</option>`)});
@@ -46,7 +46,7 @@
 
       const people = parseInt(document.getElementById("people").value);
       const start = document.getElementById("start").value;
-
+      
       const end = document.getElementById("end").value;
 
       var timeStart = new Date("01/01/2007 " + start)
