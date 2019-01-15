@@ -16,7 +16,7 @@
   select {
     display: inline-block;
   }
-/*  .time {
+  /*.time {
     display: inline-block;
   }*/
   </style>
@@ -24,7 +24,7 @@
 <body>
   <h1>האזנות ל916</h1>
   <form id='form' action="">
-  <h2>כמה אנשים מזינים</h2>
+  <h2>כמה אנשים מאזינים</h2>
   <input id='people', type="number" required>
   <h3>מאיזו שעה</h3>
   <input id='start' type="time" required>
@@ -33,13 +33,41 @@
   <input id='button' value="GO" type="submit">
   </form>
   <div id="result"></div>
-
+  <h5>00:00 יש לעשות גם שמנש</h5>
+  <div class="rules">
+    <ul>
+      <li>
+    ביקורת גנרטור כל שעה
+    </li>
+    <li>
+    ביקורת קשר כל חצי שעה -מיידי
+    </li>
+    <li>
+    במיידי מאזין ב מלא עמדות היקשרות חצי ב
+    </li>
+    <li>
+    במיידי כל 4 שעות שמנש מטרו נוזלים-יומן ספינה
+    </li>
+    <li>
+    במיידי כל מי שיוצא מהספינה לשלוח הודעה להסגן עד 3 אנשים בחוץ 
+    </li>
+<li>
+ידיעה-להעיר את הסגן ואת קודקוד
+</li>
+<li>
+יציאה-להעיף את הספינה באוויר יבבות פעמונים להעיר את ציף ראשון ואז את כולם אור לבן צעקות
+</li>
+<li>
+להעיר אחד את השני בכיף כל מה שצריך להעיר את הסגן או ציף שתיהיה אחלה האזנה
+</li>
+</ul>
+  </div>
 <script>
-  const soldiers = ['choose', 'debi','bardugo', 'goldi', 'karni', 'gidon','pluto','bar-el','balu','kofiko','chalila' ,'arbiv','leeroy','maslatzenoe','other']
+  const soldiers = ['choose', 'debi-harama','bardugo', 'goldi', 'karni', 'gidon','pluto','bar-el','balu','kofiko','chalila' ,'arbiv','leroy','maslatzenoe','other']
         const result = document.getElementById("result")
   let dropdownHTML=''
   soldiers.forEach(function(item, index){  dropdownHTML +=(`<option>${item}</option>`)});
-  console.log(dropdownHTML)
+  // console.log(dropdownHTML)
     document.getElementById('form').addEventListener('submit', function(e){
           e.preventDefault();
       result.innerHTML = ''
@@ -53,7 +81,7 @@
       var timeEnd = new Date("01/01/2007 " + end);
       if(timeEnd<timeStart){
         timeEnd = new Date("01/02/2007 " + end);
-        console.log(timeEnd);
+        // console.log(timeEnd);
       }
       var hourDiff = timeEnd - timeStart;
 
@@ -81,9 +109,65 @@ times.forEach(function(item, index){
 niceTimes.forEach(function(item, index, arr){
   // item = Math.Round(item)
    if (Object.is(arr.length - 1, index)) {return}
-  result.innerHTML = result.innerHTML + `<div class='time'> <span>${item} - ${niceTimes[index+1]}</span  </div> <select>${dropdownHTML}</select>`
+  result.innerHTML = result.innerHTML + `<div class='time'> <span>${item} - ${niceTimes[index+1]}</span>   <select>${dropdownHTML}</select></div>`
+ 
+  const hoursStart = item.split(':');
+  const dateFormattedStart = new Date();
+  dateFormattedStart.setHours(hoursStart[0])
+  dateFormattedStart.setMinutes(hoursStart[1]);
+
+  const hoursEnd = niceTimes[index+1].split(':');
+  const dateFormattedEnd = new Date();
+  dateFormattedEnd.setHours(hoursEnd[0])
+  dateFormattedEnd.setMinutes(hoursEnd[1]);
+
+  const samnashDate = new Date ();
   
-  // console.log(new Date(item));
+  let midnight = new Date(hoursEnd[0], hoursEnd[1] );
+  midnight.setDate(midnight.getDate() +1)
+  midnight.setHours('00', '00');
+  console.log(midnight)
+  const timeDiv = document.getElementsByClassName("time")[index]
+  if (dateFormattedStart <= new Date().setHours("04", '00') && dateFormattedEnd >= new Date().setHours("04", '00')){
+    console.log('samsnash');
+    console.log(dateFormattedStart)
+    timeDiv.innerHTML = timeDiv.innerHTML + '<span> samnash</span>'
+
+  } else if (dateFormattedStart <= new Date().setHours("08", '00') && dateFormattedEnd >= new Date().setHours("08", '00')) {
+     console.log('samnash');
+    console.log(dateFormattedStart)
+    timeDiv.innerHTML = timeDiv.innerHTML + '<span> samnash</span>'
+  }
+  else if (dateFormattedStart <= new Date().setHours("12", '00') && dateFormattedEnd >= new Date().setHours("12", '00')) {
+     console.log('samnash');
+    console.log(dateFormattedStart)
+    timeDiv.innerHTML = timeDiv.innerHTML + '<span> samnash</span>'
+  }
+  else if (dateFormattedStart <= new Date().setHours("16", '00') && dateFormattedEnd >= new Date().setHours("16", '00')) {
+     console.log('samnash');
+    console.log(dateFormattedStart)
+    timeDiv.innerHTML = timeDiv.innerHTML + '<span> samnash</span>'
+  }
+  else if (dateFormattedStart <= new Date().setHours("20", '00') && dateFormattedEnd >= new Date().setHours("20", '00')) {
+     console.log('samnash');
+    console.log(dateFormattedStart)
+    timeDiv.innerHTML = timeDiv.innerHTML + '<span> samnash</span>'
+  }
+   else if (dateFormattedStart <= new Date().setHours("22", '00') && dateFormattedEnd >= new Date().setHours("22", '00')) {
+     console.log('samnash');
+    console.log(dateFormattedStart)
+    timeDiv.innerHTML = timeDiv.innerHTML + '<span> samnash</span>'
+  }
+   else if (dateFormattedStart <= new Date().setHours("24", '00') && midnight >= new Date().setHours("00", '00'))  {
+    console.log('samnash');
+    console.log(dateFormattedStart)
+    timeDiv.innerHTML = timeDiv.innerHTML + '<span> samnash</span>'
+  }
+  
+  
+  
+
+
 })
 
 document.querySelectorAll('select').forEach(function(e, i){
